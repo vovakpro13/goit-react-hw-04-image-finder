@@ -17,7 +17,7 @@ const Modal = ({ src, onClose }) => {
     return () => {
       document.removeEventListener('keydown', keyDownHandler);
     };
-  }, []);
+  }, [onClose]);
 
   return (
     <div className={styles.Overlay} onClick={onClose}>

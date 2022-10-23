@@ -17,7 +17,7 @@ const ImageGalleryItem = ({ webformatURL, largeImageURL }) => {
       <li className={styles.ImageGalleryItem}>
         <img
           src={webformatURL}
-          alt="image"
+          alt="result of search"
           className={styles.ImageGalleryItemImage}
           onClick={handleOpen}
         />

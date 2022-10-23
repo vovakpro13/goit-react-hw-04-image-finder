@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TailSpin } from 'react-loader-spinner';
 
 import Searchbar from 'components/Searchbar';
@@ -13,7 +13,7 @@ export const App = () => {
   const [total, setTotal] = useState(0);
   const [images, setImages] = useState([]);
 
-  const fetchImages = () => {
+  const fetchImages = useCallback(() => {
     setLoading(true);
 
     fetch(
@@ -26,11 +26,11 @@ export const App = () => {
       })
       .catch(reason => alert(reason.message))
       .finally(() => setLoading(false));
-  };
+  }, [query, page, setTotal, setImages, setLoading]);
 
   useEffect(() => {
     if (query?.length) fetchImages();
-  }, [page, query]);
+  }, [page, query, fetchImages]);
 
   const handleSubmit = e => {
     e.preventDefault();
