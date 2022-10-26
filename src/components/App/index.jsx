@@ -13,11 +13,15 @@ export const App = () => {
   const [total, setTotal] = useState(0);
   const [images, setImages] = useState([]);
 
+  useEffect(() => {
+    if (query?.length) fetchImages();
+  }, [page, query]);
+
   const fetchImages = useCallback(() => {
     setLoading(true);
 
     fetch(
-      `https://pixabay.com/api/?q=${query}&page=${page}&key=${process.env.REACT_APP_API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
+      `${process.env.REACT_APP_BASE_API_URL}?q=${query}&page=${page}&key=${process.env.REACT_APP_API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
     )
       .then(res => res.json())
       .then(({ total, hits }) => {
@@ -26,11 +30,7 @@ export const App = () => {
       })
       .catch(reason => alert(reason.message))
       .finally(() => setLoading(false));
-  }, [query, page, setTotal, setImages, setLoading]);
-
-  useEffect(() => {
-    if (query?.length) fetchImages();
-  }, [page, query, fetchImages]);
+  }, [query, page]);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -39,7 +39,10 @@ export const App = () => {
     setImages([]);
 
     if (!!value?.length) {
-      if (page !== 1) setPage(1);
+      if (page !== 1) {
+        setPage(1);
+      }
+
       return setQuery(value);
     }
   };

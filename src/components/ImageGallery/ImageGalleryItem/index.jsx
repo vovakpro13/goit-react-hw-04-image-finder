@@ -5,7 +5,7 @@ import styles from 'components/ImageGallery/ImageGalleryItem/style.module.css';
 import Modal from 'components/Modal';
 
 const ImageGalleryItem = ({ webformatURL, largeImageURL }) => {
-  const [isOpen, setOpen] = useState();
+  const [isOpen, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -27,9 +27,9 @@ const ImageGalleryItem = ({ webformatURL, largeImageURL }) => {
 };
 
 ImageGalleryItem.propTypes = {
-  id: PropTypes.number,
-  webformatURL: PropTypes.string,
-  largeImageURL: PropTypes.string,
+  id: PropTypes.number.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
 };
 
 export default ImageGalleryItem;
